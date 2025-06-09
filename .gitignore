@@ -5,6 +5,7 @@
 *.exe
 *.out
 *.test
+/main
 
 # Go modules (通常は追跡するが、外す場合)
 # /go.mod
