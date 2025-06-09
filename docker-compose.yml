@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  backend:
+    build: .
+    volumes:
+      - .:/app
+      - /app/tmp # Airの一時ディレクトリをマウント
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=postgres://user:password@db:5432/mydatabase
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
