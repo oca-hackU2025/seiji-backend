@@ -1,18 +1,32 @@
 package main
 
 import (
+	"fmt"
+	"time"
+
+	"github.com/KENKUN-1031/seiji-backend/routes"
+
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	r := gin.Default()
+	router := gin.Default()
 
-	// インデックスルートに簡単なメッセージを返す
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "Hello from Gin!",
-		})
-	})
+	router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:3000"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}))
 
-	r.Run() // デフォルトで :8080 ポートで起動
+	routes.DefineRoutes(router)
+
+	for _, route := range router.Routes() {
+		fmt.Printf("Method: %s, Path: %s\n", route.Method, route.Path)
+	}
+
+	router.Run() // ← ここも router にする
 }
