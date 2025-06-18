@@ -6,6 +6,7 @@ import (
 	"github.com/KENKUN-1031/seiji-backend/models" // モデルのパスをプロジェクトに合わせて調整
 )
 
+// migrate
 func Migrate() error {
 	if DB == nil {
 		return fmt.Errorf("DB connection is not initialized")
@@ -22,6 +23,7 @@ func Migrate() error {
 	return nil
 }
 
+// migrate reset
 func ResetAndMigrate() error {
 	if DB == nil {
 		return fmt.Errorf("DB connection is not initialized")
