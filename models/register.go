@@ -7,6 +7,7 @@ func AllModels() []interface{} {
 		&Seijika{},
 		&Career{},
 		&Sns{},
+		&Like{},
 		// &Post{}, ←例
 	}
 }
