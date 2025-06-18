@@ -18,7 +18,7 @@ func main() {
 		log.Fatalf("DB接続失敗: %v", err)
 	}
 	//migrateしてる
-	if err := db.Migrate(); err != nil {
+	if err := db.ResetAndMigrate(); err != nil {
 		log.Fatalf("マイグレーション失敗: %v", err)
 	}
 	router := gin.Default()
