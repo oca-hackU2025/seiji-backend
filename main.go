@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"time"
 
+	"github.com/KENKUN-1031/seiji-backend/db"
 	"github.com/KENKUN-1031/seiji-backend/routes"
 
 	"github.com/gin-contrib/cors"
@@ -11,6 +13,14 @@ import (
 )
 
 func main() {
+	//dbと接続してる
+	if err := db.Connect(); err != nil {
+		log.Fatalf("DB接続失敗: %v", err)
+	}
+	//migrateしてる
+	if err := db.Migrate(); err != nil {
+		log.Fatalf("マイグレーション失敗: %v", err)
+	}
 	router := gin.Default()
 
 	router.Use(cors.New(cors.Config{
