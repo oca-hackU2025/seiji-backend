@@ -22,5 +22,6 @@ func DefineRoutes(r gin.IRouter) {
 	{
 		private.GET("/politicians/generate", controller.GetRandomSeijika)
 		private.POST("/likes", controller.CreateLike)
+		private.GET("/likes", controller.GetLikedSeijikaList)
 	}
 }
