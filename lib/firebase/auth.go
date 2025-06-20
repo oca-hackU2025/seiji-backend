@@ -24,5 +24,6 @@ func VerifyIDToken(idToken string) (*auth.Token, error) {
 	}
 
 	fmt.Println("✅ IDトークンの検証に成功: UID =", token.UID)
+	fmt.Println("📩 IDトークンの検証に成功: Username =", token.Claims["email"])
 	return token, nil
 }

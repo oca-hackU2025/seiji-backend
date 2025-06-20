@@ -15,5 +15,5 @@ type Seijika struct {
 	Activities   pq.StringArray `gorm:"type:text[]" json:"activities"`
 
 	Sns    Sns    `gorm:"foreignKey:SeijikaID" json:"sns"`    //seijikaからSnsをpreloadで呼べる (逆は無理)
-	Career Career `gorm:"foreignKey:SeijikaID" json:"career"` //seijikaからSnsをpreloadで呼べる (逆は無理)
+	Career Career `gorm:"foreignKey:SeijikaID" json:"career"` //seijikaからCareerをpreloadで呼べる (逆は無理)
 }
