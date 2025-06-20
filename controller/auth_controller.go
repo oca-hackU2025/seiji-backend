@@ -36,27 +36,27 @@ func Login(c *gin.Context) {
 
 	fmt.Println("✅ Firebase Auth success: UID =", token.UID)
 
-	// 🔐 JWT 生成
-	jwtToken, err := jwt.GenerateToken(token.UID)
-	if err != nil {
-		fmt.Println("❌ Failed to generate JWT:", err)
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate JWT"})
-		return
-	}
-
 	// 🔍 すでに存在するか確認
 	var user models.User
 	result := db.DB.Where("firebase_user_id = ?", token.UID).First(&user)
 
 	if result.Error != nil {
 		// ユーザーが見つからなければ新規作成
-		newUser := models.User{FirebaseUserID: token.UID}
-		if err := db.DB.Create(&newUser).Error; err != nil {
+		user = models.User{FirebaseUserID: token.UID}
+		if err := db.DB.Create(&user).Error; err != nil {
 			fmt.Println("❌ Failed to create user:", err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create user"})
 			return
 		}
-		fmt.Println("✅ New user created: ", newUser.ID)
+		fmt.Println("✅ New user created: ", user.ID)
+	}
+
+	// 🔐 JWT 生成（セキュリティ上、User.IDを使用）
+	jwtToken, err := jwt.GenerateToken(user.ID)
+	if err != nil {
+		fmt.Println("❌ Failed to generate JWT:", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate JWT"})
+		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{
