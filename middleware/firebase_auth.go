@@ -37,13 +37,13 @@ func JWTAuthMiddleware() gin.HandlerFunc {
 		authHeader := c.GetHeader("Authorization")
 		tokenStr := strings.TrimPrefix(authHeader, "Bearer ")
 
-		uid, err := jwt.VerifyTokenAndExtractUID(tokenStr) //jwt認証してuidを出力してる
+		uid, err := jwt.VerifyTokenAndExtractUserID(tokenStr) //jwt認証してuserIDを出力してる
 		if err != nil {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Invalid JWT"})
 			return
 		}
 
-		c.Set("uid", uid)
+		c.Set("userID", uid)
 		c.Next()
 	}
 }

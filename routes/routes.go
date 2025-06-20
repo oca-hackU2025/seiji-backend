@@ -21,6 +21,6 @@ func DefineRoutes(r gin.IRouter) {
 	private.Use(middleware.JWTAuthMiddleware()) // jwt認証が通った場合のみrouteを通す
 	{
 		private.GET("/politicians/generate", controller.GetRandomSeijika)
-		private.POST("/likes")
+		private.POST("/likes", controller.CreateLike)
 	}
 }
