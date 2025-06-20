@@ -14,5 +14,6 @@ func DefineRoutes(r gin.IRouter) {
 	api := r.Group("/api")
 	{
 		api.GET("/politicians/generate", controller.GetRandomSeijika)
+		api.POST("/auth/login", controller.Login)
 	}
 }

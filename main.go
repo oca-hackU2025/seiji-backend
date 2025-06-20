@@ -2,16 +2,27 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/KENKUN-1031/seiji-backend/db"
+	"github.com/KENKUN-1031/seiji-backend/lib/firebase"
 	"github.com/KENKUN-1031/seiji-backend/routes"
+	"github.com/joho/godotenv"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("❌ .envファイルの読み込みに失敗しました")
+	}
+	// firebaseの初期化
+	firebase.InitFirebase()
+
+	// dbの初期化
 	db.Init()
 
 	router := gin.Default()
