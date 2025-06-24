@@ -7,7 +7,7 @@ services:
       - .:/app
       - /app/tmp # Airの一時ディレクトリをマウント
     ports:
-      - "10000:10000"
+      - "8080:8080"
     environment:
       - DATABASE_URL=postgres://user:password@db:5432/mydatabase
     depends_on:

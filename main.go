@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 	"time"
 
 	"github.com/KENKUN-1031/seiji-backend/db"
@@ -39,5 +40,9 @@ func main() {
 	for _, route := range router.Routes() {
 		fmt.Printf("Method: %s, Path: %s\n", route.Method, route.Path)
 	}
-	router.Run(":10000") // ★ 必須
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080" // ローカル開発用のデフォルト
+	}
+	router.Run(":" + port)
 }
