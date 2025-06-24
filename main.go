@@ -40,12 +40,5 @@ func main() {
 	for _, route := range router.Routes() {
 		fmt.Printf("Method: %s, Path: %s\n", route.Method, route.Path)
 	}
-
-	// port := os.Getenv("PORT")
-	// if port == "" {
-	// 	port = "8080"
-	// }
-	// log.Printf("✅ Starting server on port %s\n", port)
-	// router.Run(":" + port)
-	http.ListenAndServe(":8080", router)
+	http.ListenAndServe(":10000", router)
 }
