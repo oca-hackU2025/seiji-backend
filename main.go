@@ -47,5 +47,5 @@ func main() {
 	// }
 	// log.Printf("✅ Starting server on port %s\n", port)
 	// router.Run(":" + port)
-	http.ListenAndServe(":10000", router)
+	http.ListenAndServe(":8080", router)
 }

@@ -10,5 +10,5 @@ COPY . .
 
 RUN go mod tidy
 
-EXPOSE 10000
+EXPOSE 8080
 CMD ["air", "./main"]
