@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"net/http"
 	"time"
 
 	"github.com/KENKUN-1031/seiji-backend/db"
@@ -40,5 +39,5 @@ func main() {
 	for _, route := range router.Routes() {
 		fmt.Printf("Method: %s, Path: %s\n", route.Method, route.Path)
 	}
-	http.ListenAndServe(":10000", router)
+	router.Run(":10000") // ★ 必須
 }
