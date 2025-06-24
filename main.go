@@ -1,18 +1,44 @@
 package main
 
 import (
+	"fmt"
+	"log"
+	"time"
+
+	"github.com/KENKUN-1031/seiji-backend/db"
+	"github.com/KENKUN-1031/seiji-backend/lib/firebase"
+	"github.com/KENKUN-1031/seiji-backend/routes"
+	"github.com/joho/godotenv"
+
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	r := gin.Default()
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("❌ .envファイルの読み込みに失敗しました")
+	}
+	// firebaseの初期化
+	firebase.InitFirebase()
 
-	// インデックスルートに簡単なメッセージを返す
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "Hello from Gin!",
-		})
-	})
+	// dbの初期化
+	db.Init()
 
-	r.Run() // デフォルトで :8080 ポートで起動
+	router := gin.Default()
+	router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:3000"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}))
+	routes.DefineRoutes(router)
+
+	for _, route := range router.Routes() {
+		fmt.Printf("Method: %s, Path: %s\n", route.Method, route.Path)
+	}
+
+	router.Run() // ← ここも router にする
 }
