@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
-	"os"
+	"net/http"
 	"time"
 
 	"github.com/KENKUN-1031/seiji-backend/db"
@@ -41,10 +41,11 @@ func main() {
 		fmt.Printf("Method: %s, Path: %s\n", route.Method, route.Path)
 	}
 
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
-	}
-	log.Printf("✅ Starting server on port %s\n", port)
-	router.Run(":" + port)
+	// port := os.Getenv("PORT")
+	// if port == "" {
+	// 	port = "8080"
+	// }
+	// log.Printf("✅ Starting server on port %s\n", port)
+	// router.Run(":" + port)
+	http.ListenAndServe(":8080", router)
 }
