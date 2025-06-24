@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: seiji-backend
+    env: docker
+    plan: free
+    repo: https://github.com/KENKUN-1031/seiji-backend
+    branch: develop
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: 8080
