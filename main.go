@@ -44,5 +44,6 @@ func main() {
 	if port == "" {
 		port = "8080" // ローカル開発用のデフォルト
 	}
-	router.Run(":" + port)
+	log.Printf("✅ Starting server on port %s\n", port)
+	router.Run("0.0.0.0:" + port)
 }
