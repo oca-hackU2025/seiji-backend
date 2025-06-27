@@ -16,10 +16,13 @@ import (
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("❌ .envファイルの読み込みに失敗しました")
+	if os.Getenv("GIN_MODE") != "release" {
+		err := godotenv.Load()
+		if err != nil {
+			log.Fatal("❌ .envファイルの読み込みに失敗しました")
+		}
 	}
+
 	// firebaseの初期化
 	firebase.InitFirebase()
 
