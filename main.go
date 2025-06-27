@@ -16,6 +16,7 @@ import (
 )
 
 func main() {
+	log.Print("🔥" + os.Getenv("GIN_MODE"))
 	if os.Getenv("GIN_MODE") != "release" {
 		err := godotenv.Load()
 		if err != nil {
