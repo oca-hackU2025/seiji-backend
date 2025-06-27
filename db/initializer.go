@@ -15,8 +15,8 @@ func Init() {
 		log.Fatalf("❌ マイグレーション失敗: %v", err)
 	}
 	// seedでダミーデータ入れてる
-	if err := Seed(); err != nil {
-		log.Fatalf("❌ Seed失敗: %v", err)
-	}
+	// if err := Seed(); err != nil {
+	// 	log.Fatalf("❌ Seed失敗: %v", err)
+	// }
 	fmt.Println("✅ DB Initializer Successful")
 }

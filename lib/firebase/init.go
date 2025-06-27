@@ -19,7 +19,7 @@ func InitFirebase() {
 		log.Fatal("❌ FIREBASE_CREDENTIALS が設定されていません")
 	}
 
-	fmt.Println("✅ Firebase認証ファイルパス:", credPath)
+	// fmt.Println("✅ Firebase認証ファイルパス:", credPath)
 
 	opt := option.WithCredentialsFile(credPath)
 	app, err := firebase.NewApp(context.Background(), nil, opt)
