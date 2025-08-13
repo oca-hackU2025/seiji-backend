@@ -36,7 +36,7 @@ func Login(c *gin.Context) {
 
 	fmt.Println("✅ Firebase Auth success: UID =", token.UID)
 
-	// 🔍 すでに存在するか確認
+	// 🔍 DBにすでに存在するか確認
 	var user models.User
 	result := db.DB.Where("firebase_user_id = ?", token.UID).First(&user)
 
